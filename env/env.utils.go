@@ -8,7 +8,7 @@ import (
 func SetEnv () {
 	currEnv := GetOr("GO_ENV", "development")
 	if currEnv == "development" {
-		err := godotenv.Load("../.env")
+		err := godotenv.Load()
 		if err != nil {
 			panic(err)
 		}
