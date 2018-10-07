@@ -1,9 +1,9 @@
 package router
 
 import (
+	"github.com/listmera/frank/controllers"
 	"github.com/naoina/denco"
 	"net/http"
-	"go-server/controllers"
 )
 
 func NewRouter() http.Handler {

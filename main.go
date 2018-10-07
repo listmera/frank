@@ -1,7 +1,7 @@
 package main
 
 import (
-	"frank/env"
+	"github.com/listmera/frank/env"
 )
 
 func main() {
