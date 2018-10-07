@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/listmera/frank/controllers"
+	"github.com/listmera/frank/utils"
 	"github.com/naoina/denco"
 	"net/http"
 )
@@ -14,8 +15,6 @@ func NewRouter() http.Handler {
 		mux.GET("/check", controllers.Check),
 	})
 
-	if err != nil {
-		panic(err)
-	}
+	utils.CheckErr(err)
 	return router
 }
