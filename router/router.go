@@ -15,6 +15,7 @@ func NewRouter() http.Handler {
 		mux.GET("/check", controllers.Check),
 		mux.GET("/login", controllers.Login),
 		mux.POST("/register", controllers.Register),
+		mux.GET("/redirect", controllers.Redirect),
 		mux.GET("/me", controllers.GetMe),
 		mux.PUT("/me", controllers.EditMe),
 		mux.GET("/me/refresh", controllers.RefreshToken),
