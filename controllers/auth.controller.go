@@ -16,9 +16,18 @@ func Login (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	//w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 }
 
+type registerReq struct {
+	Code string `json: "code"`
+}
+
 func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
-	w.WriteHeader(http.StatusOK)
-	//w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	decoder := json.NewDecoder(r.Body)
+
+	var req registerReq
+	err := decoder.Decode(&req)
+	utils.CheckErr(err)
+
+	models.GetTokens(req.Code) // from here on, everything should be a goroutine
 }
 
 type redirectRes struct {
