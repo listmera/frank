@@ -24,7 +24,7 @@ func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	err := decoder.Decode(&reqBody)
 	utils.CheckErr(err)
 
-	spotifyRes, err := models.GenTokenReq(reqBody.Code)
+	spotifyRes, err := models.GetTokens(reqBody.Code)
 	defer spotifyRes.Body.Close()
 	utils.CheckErr(err)
 
