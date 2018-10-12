@@ -4,12 +4,6 @@ type redirectRes struct {
 	Redirect string `json:"redirect"`
 }
 
-func NewRedirectRes (redirect string) redirectRes {
-	return redirectRes{
-		redirect,
-	}
-}
-
 type RegisterReq struct {
 	Code string `json:"code"`
 }
@@ -39,3 +33,15 @@ type image struct {
 }
 
 type images []image
+
+
+type listmeraUser struct {
+	Birthdate string `json:"birthdate"`
+	Country string `json:"country"`
+	UserName string `json:"display_name"`
+	Email string `json:"email"`
+	Href string `json:"href"`
+	UserId string `json:"id"`
+	ProfileImg string `json:"profile_image"`
+	Followers int `json:"followers"`
+}
