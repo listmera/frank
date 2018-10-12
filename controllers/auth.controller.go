@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/listmera/frank/env"
 	"github.com/listmera/frank/models"
+	"github.com/listmera/frank/structs"
 	"github.com/listmera/frank/utils"
 	"github.com/naoina/denco"
 	"net/http"
@@ -16,22 +17,23 @@ func Login (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	//w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 }
 
-type registerReq struct {
-	Code string `json: "code"`
-}
-
 func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	decoder := json.NewDecoder(r.Body)
 
-	var req registerReq
-	err := decoder.Decode(&req)
+	var reqBody structs.RegisterReq
+	err := decoder.Decode(&reqBody)
 	utils.CheckErr(err)
 
-	models.GetTokens(req.Code) // from here on, everything should be a goroutine
-}
+	spotifyRes, err := models.GenTokenReq(reqBody.Code)
+	defer spotifyRes.Body.Close()
+	utils.CheckErr(err)
 
-type redirectRes struct {
-	Redirect string `json:"redirect"`
+	var tokens structs.TokenRes
+	decoder = json.NewDecoder(spotifyRes.Body)
+	err = decoder.Decode(&tokens)
+	utils.CheckErr(err)
+
+	//models.GetTokens(req.Code) // from here on, everything should be a goroutine
 }
 
 func Redirect (w http.ResponseWriter, r *http.Request, params denco.Params) {
@@ -39,14 +41,16 @@ func Redirect (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	id := env.GetOr("SPOTIFY_ID", "test")
 	uri := env.GetOr("SPOTIFY_REDIRECT_URI", "test2")
 
-	redirect := redirectRes{
-		"https://accounts.spotify.com/authorize?response_type=code&client_id=" + id + "&scope=" +
-			url.QueryEscape(scopes) + "&redirect_uri=" + url.QueryEscape(uri),
-	}
+	encodedScopes := url.QueryEscape(scopes)
+	encodedUri := url.QueryEscape(uri)
+
+	redirectUrl := "https://accounts.spotify.com/authorize?response_type=code&client_id=" + id +
+		"&scope=" + encodedScopes + "&redirect_uri=" + encodedUri
+	resBody := structs.NewRedirectRes(redirectUrl)
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 
-	err := json.NewEncoder(w).Encode(redirect)
+	err := json.NewEncoder(w).Encode(resBody)
 	utils.CheckErr(err)
 }
