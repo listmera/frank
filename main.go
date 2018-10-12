@@ -13,7 +13,7 @@ func main() {
 	r := router.NewRouter()
 	handler := middleware.ApplyMiddleware(r)
 	log.Printf("Frank running in %s%s", env.GetOr("FRANK_HOST", "localhost"), env.GetOr("FRANK_PORT", ":3000"))
-	err := http.ListenAndServe(env.GetOr("FRANK_PORT", ":3000"), handler)
+	err := http.ListenAndServe(env.GetOr("FRANK_PORT", ":1212"), handler)
 	utils.CheckErr(err)
 }
 
