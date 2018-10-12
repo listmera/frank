@@ -33,6 +33,14 @@ func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	err = decoder.Decode(&tokens)
 	utils.CheckErr(err)
 
+	userRes, err := models.GetMe(tokens)
+	defer userRes.Body.Close()
+	utils.CheckErr(err)
+
+	var user structs.SpotifyUser
+	decoder = json.NewDecoder(userRes.Body)
+	err = decoder.Decode(&user)
+	utils.CheckErr(err)
 	//models.GetTokens(req.Code) // from here on, everything should be a goroutine
 }
 
