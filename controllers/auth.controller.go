@@ -37,10 +37,12 @@ func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	defer userRes.Body.Close()
 	utils.CheckErr(err)
 
-	var user structs.SpotifyUser
+	var spotifyUser structs.SpotifyUser
 	decoder = json.NewDecoder(userRes.Body)
-	err = decoder.Decode(&user)
+	err = decoder.Decode(&spotifyUser)
 	utils.CheckErr(err)
+
+	user := structs.NewListmeraUser(spotifyUser)
 	//models.GetTokens(req.Code) // from here on, everything should be a goroutine
 }
 
