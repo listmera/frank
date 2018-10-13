@@ -14,7 +14,7 @@ func main() {
 	defer models.Disconnect()
 	r := router.NewRouter()
 	handler := middleware.ApplyMiddleware(r)
-	log.Printf("Frank running in %s%s", env.GetOr("FRANK_HOST", "localhost"), env.GetOr("FRANK_PORT", ":3000"))
+	log.Printf("Frank running in %s%s", env.GetOr("FRANK_HOST", "localhost"), env.GetOr("FRANK_PORT", ":1212"))
 	err := http.ListenAndServe(env.GetOr("FRANK_PORT", ":1212"), handler)
 	utils.CheckErr(err)
 }
