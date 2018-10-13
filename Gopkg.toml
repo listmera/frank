@@ -36,3 +36,7 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "github.com/mongodb/mongo-go-driver"
+  version = "0.0.16"
