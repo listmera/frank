@@ -35,7 +35,7 @@ type image struct {
 type images []image
 
 
-type listmeraUser struct {
+type ListmeraUser struct {
 	Birthdate string `json:"birthdate"`
 	Country string `json:"country"`
 	UserName string `json:"display_name"`

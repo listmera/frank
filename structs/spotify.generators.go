@@ -6,8 +6,8 @@ func NewRedirectRes (redirect string) RedirectRes {
 	}
 }
 
-func NewListmeraUser (resUser SpotifyUser) listmeraUser {
-	return listmeraUser{
+func NewListmeraUser (resUser SpotifyUser) ListmeraUser {
+	return ListmeraUser{
 		resUser.Birthdate,
 		resUser.Country,
 		resUser.UserName,
