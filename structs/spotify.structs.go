@@ -1,6 +1,6 @@
 package structs
 
-type redirectRes struct {
+type RedirectRes struct {
 	Redirect string `json:"redirect"`
 }
 

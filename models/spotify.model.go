@@ -9,6 +9,32 @@ import (
 	"strings"
 )
 
+var listmeraScopes = [10]string{
+	"user-read-private",
+	"user-read-email",
+	"user-read-recently-played",
+	"user-library-read",
+	"user-read-birthdate",
+	"user-top-read",
+	"playlist-read-private",
+	"playlist-read-collaborative",
+	"playlist-modify-public",
+	"playlist-modify-private",
+}
+
+func GenRedirect () structs.RedirectRes {
+	scopes := strings.Join(listmeraScopes[:], " ")
+	id := env.GetOr("SPOTIFY_ID", "test")
+	uri := env.GetOr("SPOTIFY_REDIRECT_URI", "test2")
+
+	encodedScopes := url.QueryEscape(scopes)
+	encodedUri := url.QueryEscape(uri)
+
+	redirectUrl := "https://accounts.spotify.com/authorize?response_type=code&client_id=" + id +
+		"&scope=" + encodedScopes + "&redirect_uri=" + encodedUri
+	return structs.NewRedirectRes(redirectUrl)
+}
+
 func GetTokens (code string) (*http.Response, error) {
 	address := "https://accounts.spotify.com/api/token"
 	form := url.Values{}
