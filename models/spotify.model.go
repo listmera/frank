@@ -43,7 +43,7 @@ func GetTokens (code string) (*http.Response, error) {
 	form.Add("redirect_uri", env.GetOr("SPOTIFY_REDIRECT_URI", "FAIL!"))
 
 	auth := env.GetOr("SPOTIFY_ID", "FAIL") + ":" + env.GetOr("SPOTIFY_SECRET", "FAIL")
-	b64Auth := "Basic: " + base64.StdEncoding.EncodeToString([]byte(auth))
+	b64Auth := "Basic " + base64.StdEncoding.EncodeToString([]byte(auth))
 
 	request, err := http.NewRequest("POST", address, strings.NewReader(form.Encode()))
 	request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
@@ -51,14 +51,13 @@ func GetTokens (code string) (*http.Response, error) {
 
 	client := &http.Client{}
 	resp, err := client.Do(request)
-
 	return resp, err
 }
 
 func GetMe (tokens structs.TokenRes) (*http.Response, error) {
 	address := "https://api.spotify.com/v1/me"
 	request, err := http.NewRequest("GET", address, nil)
-	request.Header.Set("Authorization", tokens.AccessToken)
+	request.Header.Set("Authorization", "Bearer " + tokens.AccessToken)
 
 	client := &http.Client{}
 	resp, err := client.Do(request)
