@@ -1,7 +1,7 @@
 package structs
 
-func NewRedirectRes (redirect string) redirectRes {
-	return redirectRes{
+func NewRedirectRes (redirect string) RedirectRes {
+	return RedirectRes{
 		redirect,
 	}
 }
