@@ -35,6 +35,7 @@ type image struct {
 type images []image
 
 type ListmeraUser struct {
+	Id string `json:"id"`
 	Birthdate string `json:"birthdate"`
 	Country string `json:"country"`
 	UserName string `json:"display_name"`
@@ -43,4 +44,6 @@ type ListmeraUser struct {
 	SpotifyId string `json:"id"`
 	ProfileImg string `json:"profile_image"`
 	Followers int64 `json:"followers"`
+	Playlists []string `json:"playlists"`
+	Tracks []string `json:"tracks"`
 }

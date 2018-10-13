@@ -16,8 +16,8 @@ func InsertUser (user structs.ListmeraUser, tokens structs.TokenRes) (*mongo.Ins
 		bson.EC.String("spotify_id", user.SpotifyId),
 		bson.EC.String("profile_img", user.ProfileImg),
 		bson.EC.Int64("followers", user.Followers),
-		bson.EC.Array("tracks", &bson.Array{}),
-		bson.EC.Array("playlists", &bson.Array{}),
+		bson.EC.Array("tracks", bson.NewArray()),
+		bson.EC.Array("playlists", bson.NewArray()),
 		)
 	id, err := users.InsertOne(context.Background(), bsonUser)
 	return id, err

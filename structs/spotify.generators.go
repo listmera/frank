@@ -8,6 +8,7 @@ func NewRedirectRes (redirect string) RedirectRes {
 
 func NewListmeraUser (resUser SpotifyUser) ListmeraUser {
 	return ListmeraUser{
+		"",
 		resUser.Birthdate,
 		resUser.Country,
 		resUser.UserName,
@@ -16,5 +17,7 @@ func NewListmeraUser (resUser SpotifyUser) ListmeraUser {
 		resUser.UserId,
 		resUser.Images[0].Url,
 		int64(resUser.Followers.Total),
+		[]string{},
+		[]string{},
 	}
 }
