@@ -43,5 +43,5 @@ type ListmeraUser struct {
 	Href string `json:"href"`
 	UserId string `json:"id"`
 	ProfileImg string `json:"profile_image"`
-	Followers int `json:"followers"`
+	Followers int64 `json:"followers"`
 }
