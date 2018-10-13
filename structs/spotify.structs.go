@@ -34,7 +34,6 @@ type image struct {
 
 type images []image
 
-
 type ListmeraUser struct {
 	Birthdate string `json:"birthdate"`
 	Country string `json:"country"`

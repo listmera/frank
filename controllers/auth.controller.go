@@ -40,6 +40,9 @@ func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	utils.CheckErr(err)
 
 	user := structs.NewListmeraUser(spotifyUser)
+	id, err := models.InsertUser(user, tokens)
+	utils.CheckErr(err)
+
 	//models.GetTokens(req.Code) // from here on, everything should be a goroutine
 }
 
