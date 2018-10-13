@@ -40,7 +40,7 @@ type ListmeraUser struct {
 	UserName string `json:"display_name"`
 	Email string `json:"email"`
 	Href string `json:"href"`
-	UserId string `json:"id"`
+	SpotifyId string `json:"id"`
 	ProfileImg string `json:"profile_image"`
 	Followers int64 `json:"followers"`
 }

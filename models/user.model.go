@@ -13,7 +13,7 @@ func InsertUser (user structs.ListmeraUser, tokens structs.TokenRes) (*mongo.Ins
 		bson.EC.String("country", user.Country),
 		bson.EC.String("username", user.UserName),
 		bson.EC.String("href", user.Href),
-		bson.EC.String("spotify_id", user.UserId),
+		bson.EC.String("spotify_id", user.SpotifyId),
 		bson.EC.String("profile_img", user.ProfileImg),
 		bson.EC.Int64("followers", user.Followers),
 		bson.EC.Array("tracks", &bson.Array{}),

@@ -15,6 +15,6 @@ func NewListmeraUser (resUser SpotifyUser) ListmeraUser {
 		resUser.Href,
 		resUser.UserId,
 		resUser.Images[0].Url,
-		resUser.Followers.Total,
+		int64(resUser.Followers.Total),
 	}
 }
