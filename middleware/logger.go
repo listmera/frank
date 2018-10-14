@@ -29,9 +29,11 @@ func logger(h http.Handler) http.Handler {
 			w.Header()[k] = v
 		}
 
-		// grab the captured response body
 		body := rw.Body.Bytes()
-
+		for key := range rw.HeaderMap {
+			w.Header().Set(key, w.Header().Get(key))
+		}
+		w.WriteHeader(rw.Result().StatusCode)
 		w.Write(body)
 	})
 }
