@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/listmera/frank/models"
 	"github.com/listmera/frank/structs"
 	"github.com/listmera/frank/utils"
@@ -43,13 +44,14 @@ func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	id, err := models.InsertUser(user, tokens)
 	utils.CheckErr(err)
 
-	user.Id = *id //FIXME: NOT REPLYING ID?
+	user.Id = id.InsertedID //FIXME: NOT REPLYING ID?
+
+	fmt.Printf("%#v", user.Id)
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusCreated) //FIXME: RESPONDING 200 INSTEAD OF 201
 	err = json.NewEncoder(w).Encode(user)
 	utils.CheckErr(err)
-	//models.GetTokens(req.Code) // from here on, everything should be a goroutine
 }
 
 func Redirect (w http.ResponseWriter, r *http.Request, params denco.Params) {

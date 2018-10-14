@@ -1,7 +1,5 @@
 package structs
 
-import "github.com/mongodb/mongo-go-driver/mongo"
-
 type RedirectRes struct {
 	Redirect string `json:"redirect"`
 }
@@ -37,13 +35,13 @@ type image struct {
 type images []image
 
 type ListmeraUser struct {
-	Id mongo.InsertOneResult `json:"id"`
+	Id interface{} `json:"id"`
 	Birthdate string `json:"birthdate"`
 	Country string `json:"country"`
 	UserName string `json:"display_name"`
 	Email string `json:"email"`
 	Href string `json:"href"`
-	SpotifyId string `json:"id"`
+	SpotifyId string `json:"spotify_id"`
 	ProfileImg string `json:"profile_image"`
 	Followers int64 `json:"followers"`
 	Playlists []string `json:"playlists"`
