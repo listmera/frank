@@ -39,6 +39,7 @@ func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	err = decoder.Decode(&spotifyUser)
 	utils.CheckErr(err)
 
+	//TODO: we use upsert in mongo to create new user/update existing one
 	user := structs.NewListmeraUser(spotifyUser)
 	id, err := models.InsertUser(user, tokens)
 	utils.CheckErr(err)
@@ -49,6 +50,7 @@ func Register (w http.ResponseWriter, r *http.Request, params denco.Params) {
 	w.WriteHeader(http.StatusCreated)
 	err = json.NewEncoder(w).Encode(user)
 	utils.CheckErr(err)
+	//TODO: add in the response a flag saying if its a new user or an old one
 }
 
 func Redirect (w http.ResponseWriter, r *http.Request, params denco.Params) {
